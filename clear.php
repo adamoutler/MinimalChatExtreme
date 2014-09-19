@@ -3,7 +3,7 @@
 $clean_room=strip_tags( (strlen($_GET['room']) > 10) ? substr($_GET['room'],0,10) : $_GET['room'] );
 echo "woot";
 
-header('Location: http://chat.casual-dev.com?room='.$_GET["room"]);
+header('Location: /?room='.$_GET["room"]);
 if (file_get_contents("rooms/".$clean_room.".txt") != "" ){
    rename ('rooms/'.$clean_room.'.txt', "log/".$clean_room.log.time().".txt");
    file_put_contents('rooms/'.$clean_room.'.txt', '');
