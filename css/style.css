@@ -1,0 +1,42 @@
+#inputfrm {
+  display:block;
+}
+#notifications{
+  display: block;
+  float: right;
+  padding-top:.1cm
+}
+.username{ 
+   display:block;
+   float: top;
+   font-weight: bold;
+}
+
+.timestamp{ 
+   font-weight: lighter;
+   font-size: 78%;
+}
+.usertext{
+   font-size:130%;
+}
+#clear{
+   position: fixed;
+   display:block;
+   bottom: 30px;
+   right: 5px;
+}
+
+#textinput{
+ padding: 0 15px 0 10px;
+ overflow: hidden;
+}
+#textsubmit{
+ overflow: hidden;
+ display: inline-block;
+ width:100%;  
+ float:bottom;
+}
+#name{
+   display:block;
+   float:top;
+}
