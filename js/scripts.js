@@ -159,6 +159,7 @@ function submitMessage(){
             }
         })
     }else {
+        $(".username-dialog").addClass("send");
         usernamePopup();
     }
 
@@ -246,6 +247,10 @@ function setUsername(value){
     setCookie('name',value);
     $(".inputarea .message").attr('placeholder','Send chat message as '+value);
     $('.username-dialog .username').val("");
+    if($(".username-dialog").hasClass("send")){
+        submitMessage();
+        $(".username-dialog").removeClass("send");
+    }
 }
 
 function setCookie(cname,value){
