@@ -146,17 +146,22 @@ function setupChat(){
 function submitMessage(){
     var chatarea = $('.chatarea');
     var inputArea = $('.inputarea .message');
-    $.ajax("/submit.php",{
-        data:{
-            room:"N",
-            message:inputArea.val(),
-            user:getUsername()
-        },
-        success:function(data,textStatus,jqHXR){
-            updateChat();
-            inputArea.val("");
-        }
-    })
+    if(getUsername() != ""){
+        $.ajax("/submit.php",{
+            data:{
+                room:"N",
+                message:inputArea.val(),
+                user:getUsername()
+            },
+            success:function(data,textStatus,jqHXR){
+                updateChat();
+                inputArea.val("");
+            }
+        })
+    }else {
+        usernamePopup();
+    }
+
 }
 
 function clearChat(){

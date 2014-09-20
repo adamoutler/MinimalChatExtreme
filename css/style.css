@@ -575,7 +575,8 @@ html {
   .dialog .button {
     float: right;
     padding: 12px;
-    margin-top: 5px; }
+    margin-top: 5px;
+    cursor: pointer; }
     .dialog .button.submit {
       color: #5fb54c; }
     .dialog .button:active, .dialog .button:focus {

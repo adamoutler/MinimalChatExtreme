@@ -246,6 +246,8 @@ html {
         float: right;
         padding:12px;
         margin-top:5px;
+        cursor: pointer;
+
         &.submit {
             color:$primary;
         }
