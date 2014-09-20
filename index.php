@@ -44,12 +44,6 @@
     </div>
 
     <div class="chatarea">
-        <?php for($x = 0;$x < 0; $x++): ?>
-            <div class="message">
-                <div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In bibendum tempus enim, id bibendum neque. Curabitur ac nibh eu enim efficitur fermentum. Integer metus nibh, faucibus feugiat ullamcorper fringilla, tincidunt eget arcu.</div>
-                <div class="meta">Omac &#8226; 13 mins </div>
-            </div>
-        <?php endfor; ?>
     </div>
     <div class="inputarea">
         <input class="message" type="text" placeholder="Send chat message"/>
