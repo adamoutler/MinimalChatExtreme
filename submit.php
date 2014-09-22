@@ -13,4 +13,3 @@ if ($clean_data == "" || $clean_user == "") exit;
 $message = '<div itemscope itemtype="https://schema.org/CommunicateAction" class="message"><div itemprop="about" class="content">' . $clean_data . '</div><div class="meta"><span itemprop="participant" class="username">' . $clean_user . '</span> &#8226; <span itemprop="startTime" class="timestamp">' . time() . '</span></div></div>'."\r\n";
 $file_data = file_get_contents('rooms/' . $clean_room . '.txt') . $message;
 file_put_contents('rooms/' . $clean_room . '.txt', $file_data);
-?>

@@ -38,3 +38,8 @@
     -o-transform-origin: $args;
     transform-origin: $args;
 }
+
+@mixin appearance($args){
+    -webkit-appearance:none;
+    appearance: none;
+}

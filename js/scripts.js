@@ -11,7 +11,7 @@ $(function(){
     updateChat();
     runAtLoad();
     setupUsernamePopup();
-})
+});
 
 function setupUsernamePopup(){
     var userDialog = $(".username-dialog");
@@ -20,12 +20,12 @@ function setupUsernamePopup(){
             setUsername($(this).val());
             userDialog.removeClass('visible');
         }
-    })
+    });
 
     userDialog.find('.submit').click(function(){
         setUsername(userDialog.find('.username').val());
         userDialog.removeClass('visible');
-    })
+    });
 
     userDialog.find('.cancel').click(function(){
         userDialog.removeClass('visible');
@@ -51,7 +51,7 @@ function loadXMLDoc() {
     $.ajax({
         cache: false,
         type: 'HEAD',
-        url:"/rooms/"+room+".txt",
+        url:getUrl()+"rooms/"+room+".txt",
         success: function (d, r, xhr) {
             var size = xhr.getResponseHeader('Content-Length');
             if(size == null){
@@ -89,11 +89,7 @@ setInterval(function () {
 
 function usernamePopup(){
     var userDialog = $(".username-dialog");
-    userDialog.show();
-    userDialog.height(userDialog.outerHeight());
-    userDialog.css('position','fixed');
-    userDialog.addClass('visible');
-    userDialog.find('.username').focus();
+    userDialog.addClass('visible').find('.username').focus();
 }
 
 function setupHeader(){
@@ -101,21 +97,21 @@ function setupHeader(){
         e.preventDefault();
         e.stopPropagation();
         $(this).toggleClass("menuopen");
-    })
+    });
 
     $(".header .has-menu ul").click(function(e){
         e.stopPropagation();
         closeMenus();
         //e.preventDefault();
-    })
+    });
 
     $(".header .clear").click(function(){
         clearChat();
-    })
+    });
 
     $(".header .change-username").click(function(){
         usernamePopup();
-    })
+    });
 
     $("html").click(function(){
         closeMenus();
@@ -136,7 +132,7 @@ function setupChat(){
             e.stopPropagation();
             submitMessage();
         }
-    })
+    });
 
     sendButton.click(function(){
         submitMessage();
@@ -147,9 +143,9 @@ function submitMessage(){
     var chatarea = $('.chatarea');
     var inputArea = $('.inputarea .message');
     if(getUsername() != ""){
-        $.ajax("/submit.php",{
+        $.ajax(getUrl()+"submit.php",{
             data:{
-                room:"N",
+                room:room,
                 message:inputArea.val(),
                 user:getUsername()
             },
@@ -166,21 +162,38 @@ function submitMessage(){
 }
 
 function clearChat(){
-    $.ajax("/clear.php",{
-        data:{
-            room:room
-        },
-        success:function(data,textStatus){
-            setTimeout(function(){
-                updateChat();
-            },100);
-        }
-    })
+    var dialog = $('<div class="dialog confirm-clear"><div class="title">Are you sure?</div><div class="button submit">Clear Chat</div><div class="button cancel">Cancel</div><div class="clear"></div></div>');
+    dialog.find(".submit").click(function(){
+        $.ajax(getUrl()+"clear.php",{
+            data:{
+                room:room
+            },
+            success:function(data,textStatus){
+                setTimeout(function(){
+                    updateChat();
+                },100);
+            }
+        });
+        dialog.removeClass('visible');
+        setTimeout(function(){
+            dialog.remove();
+        },300)
+    });
+    dialog.find(".cancel").click(function(){
+        dialog.removeClass('visible');
+        setTimeout(function(){
+            dialog.remove();
+        },300)
+    });
+    $('body').append(dialog);
+    setTimeout(function(){
+        dialog.addClass('visible');
+    },200)
 }
 
 function updateChat(){
     var chatarea = $('.chatarea');
-    $.ajax("/retrieve.php",{
+    $.ajax(getUrl()+"retrieve.php",{
         method:"POST",
         data:{
             room:room
@@ -191,27 +204,27 @@ function updateChat(){
             html.find('.timestamp').each(function(){
                 hasMessages = true;
                 $(this).html(timeDifference($.now()/1000,$(this).html()));
-            })
+            });
             if(hasMessages == true){
                 chatarea.html(html);
             }else {
-                chatarea.html('<div class="no-messages">No messages to display.</div>');
+                var emptytext;
+                $.ajax('rooms/'+room+'clear.txt',{
+                    success:function(data,textStatus){
+                        emptytext = data;
+                        chatarea.html('<div class="no-messages">'+emptytext+'</div>');
+                    },
+                    error:function(jqXHR,textStatus,errorThrown){
+                        emptytext = '<div class="no-messages">No messages to display.</div>';
+                        chatarea.html(emptytext);
+                    }
+                });
+
             }
         }
     })
 }
 
-//prints the "cleared" message if the room is cleared.
-function notifyEmpty() {
-    //room was cleared notification
-    //xmlhttp.open("GET", 'rooms/<?php print(($_GET['room'] == "") ? "anything" : $_GET['room']); ?>clear.txt', true);
-    xmlhttp.send();
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            document.getElementById('output').innerHTML = xmlhttp.responseText;
-        }
-    }
-}
 function timeDifference(current, previous) {
     var secPerMinute = 60;
     var secPerHour = secPerMinute * 60;
@@ -246,15 +259,20 @@ function getUsername(){
 function setUsername(value){
     setCookie('name',value);
     $(".inputarea .message").attr('placeholder','Send chat message as '+value);
+    var dialog = $(".username-dialog");
     $('.username-dialog .username').val("");
-    if($(".username-dialog").hasClass("send")){
+    if(dialog.hasClass("send")){
         submitMessage();
-        $(".username-dialog").removeClass("send");
+        dialog.removeClass("send");
     }
 }
 
 function setCookie(cname,value){
     document.cookie=""+cname+"="+value+"";
+}
+
+function getUrl(){
+    return "//"+window.location.host + window.location.pathname;
 }
 
 function getCookie(cname) {

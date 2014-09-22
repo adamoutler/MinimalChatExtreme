@@ -12,7 +12,7 @@
     <meta property="og:title" content="CASUAL-Dev Minimal Chat Extreme"/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="http://chat.casual-dev.com"/>
-    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name=viewport content="width=device-width, initial-scale=1,user-scalable=no">
     <meta property="languate" content="english"/>
     <meta property="recipient" content="everyone"/>
     <meta property="agent" content="user"/>
@@ -21,11 +21,10 @@
 
     <title>Minimal Chat Extreme</title>
 
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="css/style.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<style>
+		<?php echo file_get_contents('css/style.css'); ?>
+	</style>
 
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300' rel='stylesheet' type='text/css'>
 </head>
 <body id="body" itemscope itemtype="https://schema.org/CommunicateAction">
     <div class="header">
@@ -58,9 +57,6 @@
     </div>
 
     <!--Footer Scripts-->
-    <script>
-
-    </script>
     <script type="application/ld+json">
       {
         "@context": "http://schema.org",
@@ -86,7 +82,10 @@
         var room = <?php echo '"'.$room.'"'; ?>
     </script>
     <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="js/scripts.js"></script>
+    <script src="js/scripts.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Roboto+Slab:400,700,300' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="favicon.ico">
 </body>
 
 </html>
