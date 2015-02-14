@@ -1,6 +1,5 @@
 <?php
-function processString($s)
-{
+function processString($s) {
     return preg_replace('@((https?://)?([-\w]+\.[-\w\.]+)+\w(:\d+)?(/([-\w/_\.]*(\?\S+)?)?)*)@', '<a target="_blank" href="$1">$1</a>', $s);
 }
 

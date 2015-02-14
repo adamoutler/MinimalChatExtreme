@@ -1,5 +1,4 @@
 // Global Variables
-var xmlhttp;
 var oldFileSize = 0;
 var updateRequired = false;
 var cycles = 0.20;
