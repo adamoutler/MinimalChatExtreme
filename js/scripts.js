@@ -46,6 +46,9 @@ function loadXMLDoc() {
     } else {
         curCycle = 0;
     }
+    room = room.substring(0,200);
+    room = room.replace(/[^a-zA-Z0-9]/g,'');
+
     //use jquery to check if updates are required.
     $.ajax({
         cache: false,
@@ -141,6 +144,7 @@ function setupChat(){
 function submitMessage(){
     var chatarea = $('.chatarea');
     var inputArea = $('.inputarea .message');
+    room = room.replace(/[^a-zA-Z0-9]/g,'');
     if(getUsername() != ""){
         $.ajax(getUrl()+"submit.php",{
             data:{
@@ -208,6 +212,7 @@ function updateChat(){
                 chatarea.html(html);
             }else {
                 var emptytext;
+                room = room.replace(/[^a-zA-Z0-9]/g,'');
                 $.ajax('rooms/'+room+'clear.txt',{
                     success:function(data,textStatus){
                         emptytext = data;
