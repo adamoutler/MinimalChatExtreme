@@ -1,6 +1,6 @@
 <?php
 
-$clean_room=strip_tags( (strlen($_GET['room']) > 50) ? substr($_GET['room'],0,50) : $_GET['room'] );
+$clean_room=strip_tags( (strlen($_GET['room']) > 200) ? substr($_GET['room'],0,200) : $_GET['room'] );
 echo "woot";
 
 header('Location: /?room='.$_GET["room"]);

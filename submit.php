@@ -4,7 +4,7 @@ function processString($s) {
 }
 
 $unsafe = array(".", "!", "/", ";", "!", "?", "$", "#", "*", "'", '"');
-$clean_room = str_replace($unsafe, "", strip_tags((strlen($_GET['room']) > 10) ? substr($_GET['room'], 0, 50) : $_GET['room']));
+$clean_room = str_replace($unsafe, "", strip_tags((strlen($_GET['room']) > 200) ? substr($_GET['room'], 0, 200) : $_GET['room']));
 $clean_data = processString(strip_tags((strlen($_GET['message']) > 500) ? substr($_GET['message'], 0, 500) : $_GET['message']));
 $clean_user = strip_tags((strlen($_GET['user']) > 15) ? substr($_GET['user'], 0, 15) : $_GET['user']);
 
