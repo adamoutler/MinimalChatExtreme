@@ -9,14 +9,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Cache-Control" content="no-cache">
-    <meta property="og:title" content="CASUAL-Dev Minimal Chat Extreme"/>
+    <meta property="og:title" content="Adam Outler's Minimal Chat Extreme"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="http://chat.casual-dev.com"/>
+    <meta property="og:url" content="http://chat.adamoutler.com"/>
     <meta name=viewport content="width=device-width, initial-scale=1,user-scalable=no">
     <meta property="languate" content="english"/>
     <meta property="recipient" content="everyone"/>
     <meta property="agent" content="user"/>
-    <meta property="instrument" content="CASUAL-Dev chat"/>
+    <meta property="instrument" content="Adam Outler's chat"/>
     <meta property="participant" content="user"/>
 
     <title>Minimal Chat Extreme</title>
@@ -28,7 +28,7 @@
 </head>
 <body id="body" itemscope itemtype="https://schema.org/CommunicateAction">
     <div class="header">
-        <div class="menubutton">Minimal Chat</div>
+        <div class="menubutton"><?php echo htmlspecialchars($_GET["room"]); ?> Chat</div>
         <div class="more has-menu">
             <i class="fa fa-ellipsis-v"></i>
             <div class="menu">
