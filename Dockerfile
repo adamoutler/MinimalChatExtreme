@@ -31,5 +31,5 @@ RUN     rm -Rf /var/www/MinimalChatExtreme/rooms
 COPY run.sh /
 COPY    ingress.conf /etc/nginx/http.d/ingress.conf
 RUN chmod a+x /run.sh
-#WORKDIR /var/www/MinimalChatExtreme
+EXPOSE 9000
 CMD ["/run.sh"]
