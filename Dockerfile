@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.16
 ENV LANG C.UTF-8
 WORKDIR /data
 
